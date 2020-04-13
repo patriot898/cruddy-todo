@@ -11,9 +11,16 @@ var counter = 0;
 // Wikipedia entry on Leading Zeros and check out some of code links:
 // https://www.google.com/search?q=what+is+a+zero+padded+number%3F
 
+//just takes a number and adds padded zeros up to 5 digits
+
+//added
+const setCounterToId = (err, id) => {counter = id};
+
 const zeroPaddedNumber = (num) => {
   return sprintf('%05d', num);
 };
+
+//takes a callback, reads the number in the file
 
 const readCounter = (callback) => {
   fs.readFile(exports.counterFile, (err, fileData) => {
@@ -24,6 +31,7 @@ const readCounter = (callback) => {
     }
   });
 };
+
 
 const writeCounter = (count, callback) => {
   var counterString = zeroPaddedNumber(count);
@@ -38,10 +46,30 @@ const writeCounter = (count, callback) => {
 
 // Public API - Fix this function //////////////////////////////////////////////
 
-exports.getNextUniqueId = () => {
-  counter = counter + 1;
-  return zeroPaddedNumber(counter);
+//should read the data from the counterFile and set the counter to that
+//increment it by one
+//then write that new number to the counter file
+exports.getNextUniqueId = (callback) => {
+  let err = null;
+  let id = 0;
+  //should not use global counter
+  //should run asynchronously
+  //nest functions within others
+  readCounter((error, fileData) => {
+    writeCounter(fileData + 1, (error, newId) => {
+      id = newId;
+      err = error;
+      callback(err, id);
+    }
+    );
+  });
+
 };
+
+
+
+
+
 
 
 

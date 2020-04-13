@@ -27,6 +27,7 @@ describe('getNextUniqueId', () => {
   beforeEach(cleanTestDatastore);
 
   it('should use error first callback pattern', (done) => {
+    //calls getNextUniqueId on a function with err and id as arguments
     counter.getNextUniqueId((err, id) => {
       expect(err).to.be.null;
       expect(id).to.exist;
