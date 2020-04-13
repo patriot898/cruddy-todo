@@ -8,7 +8,19 @@ var items = {};
 // Public API - Fix these CRUD functions ///////////////////////////////////////
 
 exports.create = (text, callback) => {
-  var id = counter.getNextUniqueId();
+  //the callback in getNextUniqueId should store the new ID as a variable
+  let nextId = 0;
+  let newFileName = '';
+  let err = null;
+  counter.getNextUniqueId((err, id) => {
+    nextId = id;
+    //should then write the new item to a text file with a filename of the new id
+    newFileName = path.join(_dirname, nextId);
+    fs.writeFile(newFileName, text, () => {
+
+    });
+
+  });
   items[id] = text;
   callback(null, { id, text });
 };

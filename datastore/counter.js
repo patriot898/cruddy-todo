@@ -14,7 +14,7 @@ var counter = 0;
 //just takes a number and adds padded zeros up to 5 digits
 
 //added
-const setCounterToId = (err, id) => {counter = id};
+
 
 const zeroPaddedNumber = (num) => {
   return sprintf('%05d', num);
