@@ -63,7 +63,6 @@ exports.getNextUniqueId = (callback) => {
     }
     );
   });
-
 };
 
 
